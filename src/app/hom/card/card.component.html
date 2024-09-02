@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card grid-card">
+        <div class="video-section">
+          <div class="title">Nom de l'app: {{appName}}</div>
+          <div class="video-container">
+            <video [src]="appDemo" class="card-img-top" controls></video>
+          </div>
+        </div>
+        <div class="details-section">
+          <div class="card-body">
+            <p class="card-title ">Nom client: {{nomClient}}</p> <br>
+            <p class="card-title">Description</p>
+            <p class="card-text">{{appDescription}}</p>
+          </div>
+          <div class="button-group">
+            <button class="btn btn-primary">
+              <i class="fa fa-download"></i>
+              Download</button>
+            <button class="btn btn-secondary" (click)="detail()">
+              <i class="fa fa-plus"></i>
+              Plus d’information</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

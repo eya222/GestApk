@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="text">
+      Mise a jour de l'application 
+    </div>
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="input-data">
+          <input id="CTech" type="text" formControlName="consultantTechnique" required>
+          <div class="underline"></div>
+          <label class="lolo">&nbsp;&nbsp;Consultant Technique </label>
+        </div>
+        <div class="input-data">
+          <input type="text" id="CFonc" formControlName="consultantFonctionnel" required>
+          <div class="underline"></div>
+          <label class="lolo">Consultant Fonctionnel </label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="input-data">
+          <input type="file" id="apk" accept=".apk" (change)="onFileChange($event, 'apk')" required>
+          <div class="underline"></div>
+          <label class="lala">&nbsp;&nbsp;Apk </label>
+        </div>
+        <div class="input-data">
+          <input type="file" id="document" accept=".pdf"(change)="onFileChange($event, 'document')" required>
+          <div class="underline"></div>
+          <label class="lala">Documentation </label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="input-data">
+          <input type="file" id="photos" accept="image/*" (change)="onPhotosChange($event)"required multiple>
+          <div class="underline"></div>
+          <label class="lala">Images</label>
+        </div>
+        <div class="input-data">
+          <input type="file" id="demo" accept="video/*"(change)="onFileChange($event, 'demo')" required>
+          <div class="underline"></div>
+          <label class="lala">Demo</label>
+        </div>
+      </div>
+      <div class="form-row submit-btn">
+        <div class="input-data">
+          <div class="inner"></div>
+          <input type="submit" value="ajouter">
+        </div>
+        <div class="input-data">
+          <div class="inner"></div>
+          <input type="button" value="retour" (click)="onRetour()">
+        </div>
+      </div>
+    </form>
+  </div>
+  

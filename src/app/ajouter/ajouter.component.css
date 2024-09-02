@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #3162ea;
+  justify-content: center; /* Ensures horizontal and vertical centering */
+  font-family: 'Poppins', sans-serif;
+}
+.container {
+  flex-direction: column;
+  justify-content: center; /* NEW: Ensures vertical centering within the container */
+  position: absolute; /* NEW: Position absolute for precise centering */
+  top: 50%; /* NEW: Center vertically */
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  background: #f8f9fa; /* Background color of the container */
+
+  width: 800px;
+  padding: 25px 10px 10px 40px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.container form {
+  width: 100%; /* NEW: Ensures the form takes full width of the container */
+}
+.container .text {
+  position: relative;
+  font-size: 20px;
+  line-height: 150%;
+  display: inline-block;
+  font-family: Outfit;
+  color: #3b5998;
+  text-align: left;
+}
+.container form {
+  padding: 10px 0 0 0;
+}
+.container form .form-row {
+  display: flex;
+  margin: 32px 0;
+}
+form .form-row .input-data {
+  width: 100%;
+  height: 40px;
+  margin: 0 20px;
+  position: relative;
+}
+form .form-row .textarea {
+  height: 70px;
+}
+.input-data input,
+.textarea textarea {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid #3b5998;
+  border-radius: 5px;
+  padding: 4px;
+}
+.input-data .lala{
+    transform: translateY(-30px);
+   color: #011F4B
+}
+.input-data input:focus ~ .lolo, .textarea textarea:focus ~ label,
+.input-data input:valid ~ label, .textarea textarea:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #011F4B;
+}
+.textarea textarea {
+  resize: none;
+  padding-top: 10px;
+}
+.input-data label {
+  position: absolute;
+  pointer-events: none;
+  bottom: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.textarea label {
+  width: 100%;
+  bottom: 40px;
+  background: #fff;
+}
+.input-data .underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+}
+.input-data .underline:before {
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background: #011F4B;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before,
+.textarea textarea:focus ~ .underline:before,
+.textarea textarea:valid ~ .underline:before {
+  transform: scale(1);
+}
+.submit-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Adjust the gap between buttons as needed */
+}
+.submit-btn .input-data {
+  display: flex;
+  overflow: hidden;
+  height: 45px !important;
+  flex: 1; /* Adjust width to fit within the form */
+  border-radius: 5px;
+}
+.submit-btn .input-data .inner {
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: #011F4B;
+  transition: all 0.4s;
+  border-radius: 5px;
+}
+
+.submit-btn .input-data input {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 700px) {
+  .container .text {
+    font-size: 30px;
+  }
+  .container form {
+    padding: 10px 0 0 0;
+  }
+  .container form .form-row {
+    display: block;
+  }
+  form .form-row .input-data {
+    margin: 35px 0 !important;
+  }
+  .submit-btn {
+    flex-direction: column;
+  }
+  .submit-btn .input-data {
+    width: 100% !important;
+  }
+}

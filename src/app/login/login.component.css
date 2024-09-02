@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body{ font-family: 'Poppins',sans-serif}
+body{
+  background: #011F4B;
+  overflow: hidden;
+ 
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+::selection{
+  background: rgba(255, 255, 255, 0.979);
+}
+.container{
+  max-width: 440px;
+  padding: 0 20px;
+  margin: 170px auto;
+  
+}
+.connect{text-align: center; 
+    color: #3B5998; font-size: 32px; font-family: Outfit; 
+    font-weight: 700; line-height: 48px; word-wrap: break-word;}
+.connect1{ text-align: center; color: #8B9DC3; font-size: 20px;
+   font-family: Outfit; font-weight: 400; line-height: 30px; word-wrap: break-word;}
+.wrapper{
+  width: 120%;
+  max-width: 800px; /* Allow the wrapper to be even bigger on larger screens */
+
+  background: #DFE3EE;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
+}
+.wrapper .title{
+  height: 90px;
+  background: #DFE3EE;
+  border-radius: 5px 5px 0 0;
+  color: #011F4B;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper form{
+  padding: 30px 25px 25px 25px;
+}
+.wrapper form .row{
+  height: 45px;
+  margin-bottom: 35px;
+  position: relative;
+  
+
+}
+.wrapper form .row input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 60px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+form .row input:focus{
+  border-color: #011F4B;
+  box-shadow: inset 0px 0px 2px 2px rgba(252, 252, 252, 0.986);
+}
+form .row input::placeholder{
+  color: #999;
+}
+.wrapper form .row i{
+  position: absolute;
+  width: 47px;
+  height: 100%;
+  color: #011F4B;
+  font-size: 18px;
+  background: #ffffff;
+  border: 1px solid #DFE3EE;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper form .pass{
+  margin: -8px 0 20px 0;
+}
+.wrapper form .pass a{
+  color: #011F4B;
+  font-size: 17px;
+  text-decoration: none;
+}
+.wrapper form .pass a:hover{
+  text-decoration: underline;
+}
+.wrapper form .button input{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 0px;
+  background: #011F4B;
+  border: 1px solid #011F4B;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+.logo {
+  display: flex; /* Ensures the logo is properly centered if needed */
+   /* Centers the image horizontally */
+  margin-bottom: 20px; /* Adjusts space below the logo */
+  margin-top: 10px; /* Optional: Add space above the logo */
+  margin-left:20px ;
+}
+
+.logo img {
+  max-width: 200px; /* Set the maximum width for the logo */
+  height: auto; /* Keeps the logo's aspect ratio */
+  margin: 10px 0; /* Adds vertical margin around the logo */
+}

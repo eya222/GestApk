@@ -1,0 +1,53 @@
+<body><div>
+
+<div class="container">
+  <div class="wrapper">
+    <div class="logo">
+        <img src="/assets/Logo-removebg-preview.png" alt="Logo" />
+      </div>
+      <div class="connect">Inscrivez vous</div>
+      <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+          <div class="row">
+              <i class="fa fa-envelope"></i>
+              <input id="email" formControlName="email" type="text" placeholder="Email" required>
+              <div *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+                  <small *ngIf="signUpForm.get('email')?.errors?.['required']">Email is required.</small>
+                  
+                  <small *ngIf="signUpForm.get('email')?.errors?.['pattern']">
+                   Invalid email format
+                  </small>
+              </div>
+          </div>
+          <div class="row">
+              <i class="fa fa-user"></i>
+              <input id="name" formControlName="name" type="text" placeholder="Name" required>
+              <div *ngIf="signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched">
+                  <small *ngIf="signUpForm.get('name')?.errors?.['required']">Name is required.</small>
+              </div>
+          </div>
+          <div class="row">
+              <i class="fa fa-briefcase"></i>
+              <select id="fonction" name="fonction" formControlName="fonction">
+                  <option value="ConsultantTech">Consultant Technique</option>
+                  <option value="ConsultantFonc">Consultant Fonctionnel</option>
+              </select>
+          </div>
+          <div class="row">
+              <i class="fa fa-lock"></i>
+              <input id="password" formControlName="password" type="password" placeholder="Password" required>
+              <div *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+                  <small *ngIf="signUpForm.get('password')?.errors?.['required']">Password is required.</small>
+                  <small *ngIf="signUpForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+                  
+              </div>
+          </div>
+          <div class="row button">
+              <input type="submit" value="S'inscrire" >
+          </div>
+          <div class="row button">
+              <input type="button" value="Annuler" (click)="navigateToLogin()">
+          </div>
+      </form>
+  </div>
+</div>
+</div></body>

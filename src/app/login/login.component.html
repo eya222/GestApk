@@ -1,0 +1,44 @@
+
+<body>
+<div >
+    
+        <div class="container">
+       
+        <div class="wrapper">
+          <div class="logo">
+            <img src="/assets/Logo-removebg-preview.png" alt="Logo" />
+          </div>
+            <div class="connect">Se connecter</div>
+            <div class="connect1">Connectez vous pour acceder aux applications mobiles</div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="error-message" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+            <div class="row">
+              <i class="fa fa-user"></i>
+              <input id="email"formControlName="email" type="text" placeholder="Email" required ng>
+              <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+                <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+              </div>
+            </div>
+            <div class="row">
+              <i class="fa fa-lock"></i>
+              <input id="password" formControlName="password" type="password" placeholder="Password" required>
+              <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+              </div>
+            </div>
+            <div class="pass"><a  (click)="navigateTorecup()">Mot de passe oublie</a></div>
+            <div class="row button">
+              <input type="submit"  [disabled]="loginForm.invalid" value="Se Connecter">
+            </div>
+            <div  class="row button" >
+              
+                <input type="submit" value="S'inscrire" (click)="navigateToAbout()">
+              </div>
+          </form>
+        </div>
+        </div>
+      </div>
+    </body>
