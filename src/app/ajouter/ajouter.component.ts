@@ -51,7 +51,6 @@ export class AjouterComponent implements OnInit {
       this.uploadForm.patchValue({ photos: files });
     }
   }
-
   onSubmit() {
     if (this.uploadForm.invalid) {
       return;
@@ -99,6 +98,8 @@ export class AjouterComponent implements OnInit {
       }
     });
   }
+  
+  
   onRetour() {
     if (!this.isUploading) {
       this.router.navigate(['/home']);

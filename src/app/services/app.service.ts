@@ -6,7 +6,8 @@ import { Appli } from '../shared/appli.model';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { HttpEventType } from '@angular/common/http';
-
+import { catchError } from 'rxjs/operators';
+import { HttpEvent } from '@angular/common/http'; // <-- Add this import
 @Injectable({
     providedIn: 'root'
 })
@@ -32,67 +33,51 @@ export class AppService {
       return this.http.get<Appli>(`${this.apiUrl1}/${id}`);
     }
   
-    createApplication(formData: FormData): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl1}/up`, formData, {
-        reportProgress: true,  // Enable progress tracking
-        observe: 'events'      // Observe upload events
-      }).pipe(
-        map(event => {
-          switch (event.type) {
-            case HttpEventType.UploadProgress:
-              // Calculate the progress percentage
-              const progress = Math.round((100 * event.loaded) / (event.total ?? 1));
-              return { status: 'progress', message: progress };
-            case HttpEventType.Response:
-              // The upload is complete, return the response body
-              return event.body;
-            default:
-              return `Unhandled event: ${event.type}`;
-          }
-        })
-      );
-    }
+       // Handle the HTTP event to calculate progress
+       private getEventMessage(event: HttpEvent<any>): { progress: number, event: HttpEvent<any> } {
+        switch (event.type) {
+          case HttpEventType.UploadProgress:
+            const progress = event.total ? Math.round((100 * event.loaded) / event.total) : 0;
+            return { progress, event };
+    
+          case HttpEventType.Response:
+            return { progress: 100, event };
+    
+          default:
+            return { progress: 0, event };
+        }
+      }
+    
+      // Handle error
+      private handleError(error: any): Observable<never> {
+        console.error('Upload failed:', error);
+        throw new Error('File upload failed, please try again later.');
+      }
+    
+      createApplication(formData: FormData): Observable<{ progress: number, event: HttpEvent<any> }> {
+        return this.http.post(`${this.apiUrl1}/up`, formData, {
+          reportProgress: true, 
+          observe: 'events'      
+        }).pipe(
+          map(event => this.getEventMessage(event)),
+          catchError(this.handleError)
+        );
+      }
   
-    updateApplication(id: string,formData: FormData): Observable<Appli> {
-      return this.http.put<any>(`${this.apiUrl}/${id}`, formData, {
-        reportProgress: true,  // Enable progress tracking
-        observe: 'events'      // Observe upload events
-      }).pipe(
-        map(event => {
-          switch (event.type) {
-            case HttpEventType.UploadProgress:
-              // Calculate the progress percentage
-              const progress = Math.round((100 * event.loaded) / (event.total ?? 1));
-              return { status: 'progress', message: progress }; // Return progress status
-            case HttpEventType.Response:
-              // The upload is complete, return the response body
-              return event.body; // Return the full response
-            default:
-              return `Unhandled event: ${event.type}`; // Handle unexpected events
-          }
-        })
-      );
-    }
+   
     
-    addUpdate(id: string|null, formData: FormData): Observable<any> {
+    
+    addUpdate(id: string | null, formData: FormData): Observable<any> {
       return this.http.post<any>(`${this.apiUrl1}/updates/${id}`, formData, {
-        reportProgress: true,  // Enable progress tracking
-        observe: 'events'      // Observe upload events
-      }).pipe(
-        map(event => {
-          switch (event.type) {
-            case HttpEventType.UploadProgress:
-              const progress = Math.round((100 * event.loaded) / (event.total ?? 1));
-              return { status: 'progress', message: progress }; // Emit progress event
-            case HttpEventType.Response:
-              return event; // Emit the final response event
-            default:
-              return `Unhandled event: ${event.type}`;
-          }
-        })
-      );
-    }
-    
+        reportProgress: true,
+        observe: 'events'
+    }).pipe(
+        map(event => this.getEventMessage(event)),
+        catchError(this.handleError)
+    );
+}
+  
+
     logout(): void {
       localStorage.removeItem('authToken'); // Remove the token
       this.router.navigate(['/login']); // Redirect to login page

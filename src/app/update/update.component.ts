@@ -78,8 +78,8 @@ export class UpdateComponent implements OnInit {
       return;
     }
   
-    this.isUploading = true; // Trigger the upload circle
-    this.submitDisabled = true; // Disable the submit button during the upload
+    this.isUploading = true; 
+    this.submitDisabled = true; 
   
     const formData = new FormData();
     for (const key of Object.keys(this.updateForm.value)) {
@@ -95,28 +95,35 @@ export class UpdateComponent implements OnInit {
       }
     }
   
-    // Track progress and handle the response
     this.AppService.addUpdate(this.appId, formData).subscribe({
       next: (event: any) => {
-        if (event instanceof HttpResponse) {
-          // The upload is complete
+        console.log('Event type:', event.type); // Debugging
+  
+        if (event.progress !== undefined) {
+          this.progressValue = event.progress; // Update progress
+        }
+  
+        if (event.event.type === HttpEventType.Response) {
+          // Handle final response from backend
           this.isUploading = false;
           this.submitDisabled = false;
-          console.log('Upload successful:', event.body);
-          this.router.navigate([`/detail/${this.appId}`]); // Navigate on successful response
-        } else if (event.type === HttpEventType.UploadProgress) {
-          // Handle progress update
-          const progress = Math.round((100 * event.loaded) / (event.total ?? 1));
-          this.progressValue = progress; // Update the progress bar
+          console.log("heheheheh")
+          
+            console.log('Upload successful:', event.event.body);
+            this.router.navigate(['/home']);
+          
         }
       },
       error: (error: any) => {
-        console.error('Upload failed:', error);
+        console.error('Update failed:', error); // Handle errors
         this.isUploading = false;
         this.submitDisabled = false;
       }
     });
   }
+  
+  
+
   
   onRetour(){
     this.router.navigate([`/detail/${this.appId}`])

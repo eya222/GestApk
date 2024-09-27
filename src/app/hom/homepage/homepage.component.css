@@ -18,9 +18,9 @@ h1.fw-bold {
 
 .suggestions-dropdown {
   position: absolute;
-  top: 30%; /* Adjust this value to move the dropdown closer to the search bar */
+  top: 27%; 
   left: 0;
-  width: 100%; /* Match the width of the input */
+  width: 100%; 
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #fff; /* Ensure background is visible */
@@ -29,7 +29,7 @@ h1.fw-bold {
   overflow-y: auto;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   max-width: 500px;
-  left: 43%; /* Center the dropdown horizontally */
+  left: 43%;
   transform: translateX(-50%); /* Adjust for perfect centering */
   width: calc(100% - 2px); /* Match the width of the input minus any borders if needed */
   

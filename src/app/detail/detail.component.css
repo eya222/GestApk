@@ -247,7 +247,7 @@ input {
   overflow-y: auto;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   max-width: 400px; /* Reduced max-width */
-  left: 52%;
+  left: 48%;
   transform: translateX(-50%);
   width: calc(100% - 2px);
 }
