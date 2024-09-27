@@ -110,7 +110,9 @@ export class UpdateComponent implements OnInit {
           console.log("heheheheh")
           
             console.log('Upload successful:', event.event.body);
-            this.router.navigate(['/home']);
+            this.router.navigate([`/detail/${this.appId}`]).then(() => {
+              window.location.reload(); // Force reload the page
+            });;
           
         }
       },

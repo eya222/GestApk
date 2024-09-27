@@ -87,7 +87,9 @@ export class AjouterComponent implements OnInit {
           console.log("heheheheh")
           
             console.log('Upload successful:', event.event.body);
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home']).then(() => {
+              window.location.reload(); // Force reload the page
+            });;
           
         }
       },
