@@ -53,19 +53,17 @@
     </div>
    
   
-  <!-- Applications List -->
+
   <div class="row mb-4">
     <div class="container">
       <h1 class="fw-bold">Liste des applications</h1>
       <div class="row">
-        <div class="col-md-4" *ngFor="let app of applications">
-          <app-card [appName]="app.name" [appDescription]="app.description" [appDemo]="app.updates[0].demo ||null"
-          [id]="app._id ||''" [nomClient]="app.client" ></app-card>
-          
-        </div>
+        <div class="col-md-4 col-sm-6" *ngFor="let app of applications">
+    <app-card [appName]="app.name" [appDescription]="app.description" [appDemo]="app.updates[0].demo ||null"
+    [id]="app._id ||''" [nomClient]="app.client" ></app-card>
+</div>
       </div>
     </div>
   </div>
-</div>
-<router-outlet></router-outlet>
 
+<router-outlet></router-outlet>

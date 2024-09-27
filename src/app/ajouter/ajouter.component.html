@@ -3,6 +3,8 @@
     Ajouter une application mobile
   </div>
   <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+    
+    
     <div class="form-row">
       <div class="input-data">
         <input id="name" type="text" formControlName="name" required>
@@ -34,19 +36,19 @@
         <label class="lala">&nbsp;&nbsp;Apk </label>
       </div>
       <div class="input-data">
-        <input type="file" id="document" accept=".pdf"(change)="onFileChange($event, 'document')" required>
+        <input type="file" id="document" accept=".pdf" (change)="onFileChange($event, 'document')" required>
         <div class="underline"></div>
         <label class="lala">Documentation </label>
       </div>
     </div>
     <div class="form-row">
       <div class="input-data">
-        <input type="file" id="photos" accept="image/*"(change)="onPhotosChange($event)" required multiple>
+        <input type="file" id="photos" accept="image/*" (change)="onPhotosChange($event)" required multiple>
         <div class="underline"></div>
         <label class="lala">Images</label>
       </div>
       <div class="input-data">
-        <input type="file" id="demo" accept="video/*"(change)="onFileChange($event, 'demo')" required>
+        <input type="file" id="demo" accept="video/*" (change)="onFileChange($event, 'demo')" required>
         <div class="underline"></div>
         <label class="lala">Demo</label>
       </div>
@@ -61,7 +63,6 @@
       </div>
     </div>
     <div class="form-row submit-btn">
-      
       <div class="input-data">
         <div class="inner"></div>
         <input type="submit" value="ajouter">
@@ -72,4 +73,9 @@
       </div>
     </div>
   </form>
+  <div *ngIf="isUploading" class="spinner">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div>
 </div>
+

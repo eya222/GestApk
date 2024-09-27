@@ -1,37 +1,30 @@
-import { Component ,OnInit} from '@angular/core';
-import { FormBuilder, FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppService } from '../services/app.service';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { Appli } from '../shared/appli.model';
-import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common'; // Ensure CommonModule is imported
 @Component({
   selector: 'app-ajouter',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,FormsModule,RouterOutlet],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './ajouter.component.html',
-  styleUrl: './ajouter.component.css'
+  styleUrls: ['./ajouter.component.css'],
 })
-export class AjouterComponent implements OnInit{
+export class AjouterComponent implements OnInit {
   uploadForm: FormGroup;
-  selectedFiles: { [key: string]: File[] } = {
-    apk: [],
-    document: [],
-    photos: [],
-    demo: []
-  };
-  ngOnInit(): void {
-  }
-
+  isUploading: boolean = false; // Track upload status
+  submitDisabled: boolean = false;
+ 
+  progressValue = 0;
   constructor(
     private fb: FormBuilder,
     private appService: AppService,
     private router: Router
   ) {
     this.uploadForm = this.fb.group({
-      CTech:['', Validators.required],
-      CFonc:['', Validators.required],
+      CTech: ['', Validators.required],
+      CFonc: ['', Validators.required],
       name: ['', Validators.required],
       client: ['', Validators.required],
       description: ['', Validators.required],
@@ -39,9 +32,12 @@ export class AjouterComponent implements OnInit{
       document: [null, Validators.required],
       photos: [null, Validators.required],
       demo: [null, Validators.required],
-      date: [new Date().toISOString().substring(0, 10)] 
+      date: [new Date().toISOString().substring(0, 10)]
     });
   }
+
+  ngOnInit(): void {}
+
   onFileChange(event: any, controlName: string) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -57,7 +53,13 @@ export class AjouterComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log('Form Values:', this.uploadForm.value);
+    if (this.uploadForm.invalid) {
+      return;
+    }
+  
+    this.isUploading = true;
+    this.submitDisabled = true;
+  
     const formData = new FormData();
     for (const key of Object.keys(this.uploadForm.value)) {
       const value = this.uploadForm.value[key];
@@ -71,19 +73,35 @@ export class AjouterComponent implements OnInit{
         formData.append(key, value);
       }
     }
-    // Logging FormData keys and values
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
-    this.appService.createApplication(formData).subscribe(response => {
-      console.log('Upload successful:', response);
-      this.router.navigate(['/home']);
-    }, error => {
-      console.error('Upload failed:', error);
-    });
-  }
-  onRetour(){
-    this.router.navigate(['/home'])
-  }
   
+    this.appService.createApplication(formData).subscribe({
+      next: (event: any) => {
+        console.log('Event in submit:', event); // Log every event in the subscription
+        if (event.progress !== undefined) {
+          this.progressValue = event.progress; // Update progress
+        }
+  
+        if (event.event.type === HttpEventType.Response) {
+          // Handle final response from backend
+          this.isUploading = false;
+          this.submitDisabled = false;
+          console.log("heheheheh")
+          
+            console.log('Upload successful:', event.event.body);
+            this.router.navigate(['/home']);
+          
+        }
+      },
+      error: (error: any) => {
+        console.error('Upload failed:', error); // Log errors
+        this.isUploading = false;
+        this.submitDisabled = false;
+      }
+    });
+  }
+  onRetour() {
+    if (!this.isUploading) {
+      this.router.navigate(['/home']);
+    }
+  }
 }

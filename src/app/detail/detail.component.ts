@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 export class DetailComponent implements OnInit {
   app: any;
   latestUpdate:any;
+  latestsUpdate:any;
+
   otherUpdates:any;
  
   query: string = '';
@@ -40,7 +42,8 @@ export class DetailComponent implements OnInit {
       this.app = data;
       console.log(this.app);
       this.latestUpdate = this.app.updates[0]; 
-    this.otherUpdates = this.app.updates.slice(1); 
+      this.latestsUpdate = this.app.updates.slice(1,4)
+    this.otherUpdates = this.app.updates; 
     });
   }
   onInputChange() {
@@ -63,14 +66,12 @@ export class DetailComponent implements OnInit {
   onSelect(suggestion: any) {
     const url = `/detail/${suggestion._id}`;
     this.router.navigate([url]).then(() => {
-      // Force a reload of the page after navigation
       window.location.reload();
     });
    
   }
 
   onBlur() {
-    // Hide suggestions when focus is lost
     setTimeout(() => {
       this.showSuggestions = false;
     }, 100); // Delay to allow click event on suggestion
@@ -96,6 +97,9 @@ export class DetailComponent implements OnInit {
       }
       retour(){
         this.router.navigate(['/home']);
+      }
+      goToMoreDetails() {
+        this.router.navigate([`/updates/${this.app._id}`]);
       }
 
 }

@@ -1,131 +1,174 @@
-h1.fw-bold {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #3b5998;
-  }
-    .btn {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 500;
-    padding-left: 5px;
-    background: #011F4B;
-    border: 6px solid #011F4B;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  .rectangle-parent{
-    padding: 10px;
-  }
-  form {
-    position: relative;
-    height: 50px;
-    background: white;
-    box-sizing: border-box;
-    border-radius: 4px;
-    border: 4px solid white;
-    width: 500px;
-  }
-  
-  input {
-    width: calc(100% - 50px); 
-    height: 50px;
-    line-height: 30px;
-    outline: 0;
-    border: 0;
-    font-size: 1em;
-    border-radius: 20px;
-    padding: 0 20px;
-    max-width: 500px;
-  }
-  
-  .btn1 {
-    box-sizing: border-box;
-    padding: 10px;
-    width: 42.5px;
-    height: 42.5px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 4px;
-    color: #07051a;
-    text-align: center;
-    font-size: 1.2em;
-    background: none;
-    border: none;
-  }
-  
-  .row.justify-content-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .btn-add {
-    margin-left: 6rem; /* Adjust spacing as needed */
-  }
-  
-  .input-group {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    display: flex;
-  }
-  
-  .input-group .form-control {
-    
-    border-bottom:5px solid #011F4B;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    display: flex;
-   
-  }
-  
-  .input-group .btn-outline-secondary {
-    border-color: #ced4da; 
-    display: flex;
-  }
-  
-  .input-group .btn-outline-secondary img {
-    width: 1.5rem; 
-    height: 1.5rem;
-    display: flex;
-  }
-  
-  .d-flex {
-    display: flex;
-    align-items: center;
-  }
-  
-  .justify-content-between {
-    justify-content: space-between;
-  }
-  
-.container {
-    width: 100%;
-    background-color: #fff;
-    height: 1138px;
-    font-size: 18px;
-    color: #3b5998;
-    font-family: Outfit;
-    display: flex;
-    flex-direction: column;
+
+.content-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+  align-items: stretch;
 }
-.top-row, .bottom-row {
-    display: flex;
-    gap: 40px; 
+
+/* Video Section */
+.video-section,
+.app-details,
+.updates-section {
+  flex: 1;
+  padding: 15px;
+  background-color: #DFE3EE;
+  border-radius: 6px;
+  display: flex; 
+  flex-direction: column; /* Arrange children vertically */
+}
+
+
+.video-section .demo-video,
+.app-details,
+.updates-section {
+  flex: 1; /* Allows sections to grow and fill space */
+}
+
+
+.app-details {
+  font-size: 16px;
+  line-height: 1.4;
+  justify-content: flex-start; 
+}
+
+.updates-section {
+  margin-top: 0.8cm; /* Maintained margin for spacing */
+}
+
+h1.fw-bold {
+  font-size: 1.5rem; /* Reduced font size */
+  font-weight: bold;
+  color: #3b5998;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 16px; 
+  font-weight: 500;
+  padding-left: 4px; 
+  background: #011F4B;
+  border: 5px solid #011F4B;
+  border-radius: 8px; 
+  cursor: pointer;
+}
+
+.rectangle-parent {
+  padding: 8px; 
+}
+
+form {
+  position: relative;
+  height: 40px; /* Reduced height */
+  background: white;
+  box-sizing: border-box;
+  border-radius: 3px; /* Reduced border-radius */
+  border: 3px solid white; /* Reduced border thickness */
+  width: 400px; /* Reduced width */
+}
+
+input {
+  width: calc(100% - 45px); /* Adjusted width to match new form size */
+  height: 40px; /* Reduced height */
+  line-height: 24px; /* Adjusted line height */
+  outline: 0;
+  border: 0;
+  font-size: 0.9em; /* Reduced font size */
+  border-radius: 15px; /* Reduced border-radius */
+  padding: 0 15px; /* Slightly reduced padding */
+  max-width: 400px; /* Adjusted max-width */
+}
+
+.btn1 {
+  box-sizing: border-box;
+  padding: 8px;
+  width: 40px; /* Slightly reduced button size */
+  height: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 3px; /* Slightly reduced border-radius */
+  color: #07051a;
+  text-align: center;
+  font-size: 1em; /* Reduced font size */
+  background: none;
+  border: none;
+}
+
+.row.justify-content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.d-flex.align-items-center {
+  gap: 2rem; /* Creates a gap between the buttons */
+}
+
+.input-group {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  display: flex;
+}
+
+.form-control {
+  border-bottom: 4px solid #011F4B; /* Reduced border thickness */
+  border-radius: 0.3rem; /* Reduced border-radius */
+  font-size: 0.9rem; /* Reduced font size */
+  display: flex;
+}
+
+.input-group .btn-outline-secondary {
+  border-color: #ced4da;
+  display: flex;
+}
+
+.input-group .btn-outline-secondary img {
+  width: 1.2rem; /* Reduced image size */
+  height: 1.2rem;
+  display: flex;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.container {
+  width: 100%;
+  background-color: #fff;
+  height: 900px; /* Reduced container height */
+  font-size: 16px; /* Reduced font size */
+  color: #3b5998;
+  font-family: Outfit;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-row,
+.bottom-row {
+  display: flex;
+  gap: 30px; /* Reduced gap */
 }
 
 .video-section {
   flex: 2;
-  padding: 20px;
+  padding: 15px; /* Reduced padding */
   background-color: #DFE3EE;
-  border-radius: 8px;
-  margin-bottom: 1cm;
-  margin-top: 1cm;
-  width: 100%; /* Ensure the video section takes full width */
-  max-width: 600px; /* Set maximum width for the video */
-  height: auto; /* Let height adjust automatically */
+  border-radius: 6px; /* Reduced border-radius */
+  margin-bottom: 0.8cm;
+  margin-top: 0.8cm;
+  width: 100%;
+  max-width: 500px; /* Reduced max-width */
+  height: auto;
   position: relative;
   overflow: hidden;
 }
@@ -133,52 +176,51 @@ h1.fw-bold {
 .demo-video {
   width: 100%;
   height: 100%;
-  max-width: 600px; /* Set maximum width */
-  max-height: 500px; /* Set maximum height */
-  object-fit: contain; /* Ensure the entire video is visible */
-  min-width: 300px; /* Set a minimum width */
-  border-radius: 8px; /* Match the video container's rounded corners */
+  max-width: 500px; /* Reduced max-width */
+  max-height: 400px; /* Reduced max-height */
+  object-fit: contain;
+  min-width: 250px; /* Reduced min-width */
+  border-radius: 6px; /* Reduced border-radius */
 }
-
 
 /* App Details styling */
 .app-details {
   flex: 1;
-  padding: 20px;
-  padding-top: 60px;
-  background-color:  #DFE3EE;
-  border-radius: 8px;
-  margin-bottom: 1cm;
-  font-size: 24px;
-  line-height: 1.5;
-  justify-content: center; 
-  align-items: center; 
-  margin-top: 1cm;
-
+  padding: 15px;
+  padding-top: 50px; /* Adjusted padding */
+  background-color: #DFE3EE;
+  border-radius: 6px; /* Reduced border-radius */
+  margin-bottom: 0.8cm;
+  font-size: 20px; /* Reduced font size */
+  line-height: 1.4;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.8cm;
 }
 
 /* Updates Section styling */
 .updates-section {
-    flex: 1;
-    padding: 20px;
-    background-color: #DFE3EE;
-    border-radius: 8px;
+  flex: 1;
+  padding: 15px;
+  background-color: #DFE3EE;
+  border-radius: 6px; /* Reduced border-radius */
 }
 
 .images-gallery {
-  margin-top: 1em; /* Space above the images gallery */
+  margin-top: 0.8em; /* Adjusted margin */
   display: flex;
-  flex-wrap: wrap; /* Allow images to wrap onto new lines */
-  gap: 10px; /* Space between images */
+  flex-wrap: wrap;
+  gap: 8px; /* Reduced gap */
 }
 
 .image-item {
-  width: 150px; /* Fixed width */
-  height: 150px; /* Fixed height */
-  object-fit: cover; /* Ensure image covers the area */
-  border-radius: 8px; /* Rounded corners */
-  border: 2px solid #ddd; /* Border around images */
+  width: 120px; /* Reduced image size */
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px; /* Reduced border-radius */
+  border: 1px solid #ddd; /* Reduced border */
 }
+
 .search-container {
   position: relative;
   width: 100%;
@@ -186,29 +228,28 @@ h1.fw-bold {
 
 .search-input {
   width: 100%;
-  padding: 10px;
+  padding: 8px; /* Reduced padding */
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px; /* Reduced font size */
 }
 
 .suggestions-dropdown {
   position: absolute;
-  top: 30%; /* Adjust this value to move the dropdown closer to the search bar */
+  top: 12%; /* Adjusted position */
   left: 0;
-  width: 100%; /* Match the width of the input */
+  width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #fff; /* Ensure background is visible */
+  background-color: #fff;
   z-index: 1000;
-  max-height: 300px;
+  max-height: 250px; /* Reduced max-height */
   overflow-y: auto;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  left: 43%; /* Center the dropdown horizontally */
-  transform: translateX(-50%); /* Adjust for perfect centering */
-  width: calc(100% - 2px); /* Match the width of the input minus any borders if needed */
-  
+  max-width: 400px; /* Reduced max-width */
+  left: 52%;
+  transform: translateX(-50%);
+  width: calc(100% - 2px);
 }
 
 .suggestions-dropdown ul {
@@ -218,7 +259,7 @@ h1.fw-bold {
 }
 
 .suggestions-dropdown li {
-  padding: 10px;
+  padding: 8px; /* Reduced padding */
   cursor: pointer;
   border-bottom: 1px solid #ddd;
 }
@@ -226,13 +267,38 @@ h1.fw-bold {
 .suggestions-dropdown li:hover {
   background-color: #f0f0f0;
 }
-.actions{display: flex;
-  gap: 1rem; 
-margin-top: 20px;}
+
+
+.actions {
+  display: flex;              /* Enable flex layout */
+  gap: 1rem;                  /* Equal spacing between buttons */
+  justify-content: flex-start; /* Align items to the start */
+}
+
+.actions a, 
+.actions button {
+  margin: 0;
+  margin-top: 1rem;
+                 /* Reset any default margin */
+  display: inline-flex;         /* Ensure buttons and links align uniformly */
+  align-items: center;          /* Align icons and text */
+}
+
+.actions button {
+  min-width: 150px;             /* Optional: Ensures buttons have a consistent width */
+           /* Adjust padding to ensure uniform look */
+}
+
+.actions a button {
+  width: 100%;                  /* Ensure anchor-wrapped buttons behave like standalone buttons */
+}
+
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .top-row, .bottom-row {
-        flex-direction: column; /* Stack rows on smaller screens */
-    }
+  .top-row,
+  .bottom-row {
+    flex-direction: column;
+  }
 }

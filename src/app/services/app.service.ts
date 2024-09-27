@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { User } from '../shared/user.model';
 import { Appli } from '../shared/appli.model';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { HttpEventType } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -31,16 +33,66 @@ export class AppService {
     }
   
     createApplication(formData: FormData): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl1}/up`, formData);
+      return this.http.post<any>(`${this.apiUrl1}/up`, formData, {
+        reportProgress: true,  // Enable progress tracking
+        observe: 'events'      // Observe upload events
+      }).pipe(
+        map(event => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              // Calculate the progress percentage
+              const progress = Math.round((100 * event.loaded) / (event.total ?? 1));
+              return { status: 'progress', message: progress };
+            case HttpEventType.Response:
+              // The upload is complete, return the response body
+              return event.body;
+            default:
+              return `Unhandled event: ${event.type}`;
+          }
+        })
+      );
     }
   
-    updateApplication(id: string, application: Appli): Observable<Appli> {
-      return this.http.put<Appli>(`${this.apiUrl}/${id}`, application);
+    updateApplication(id: string,formData: FormData): Observable<Appli> {
+      return this.http.put<any>(`${this.apiUrl}/${id}`, formData, {
+        reportProgress: true,  // Enable progress tracking
+        observe: 'events'      // Observe upload events
+      }).pipe(
+        map(event => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              // Calculate the progress percentage
+              const progress = Math.round((100 * event.loaded) / (event.total ?? 1));
+              return { status: 'progress', message: progress }; // Return progress status
+            case HttpEventType.Response:
+              // The upload is complete, return the response body
+              return event.body; // Return the full response
+            default:
+              return `Unhandled event: ${event.type}`; // Handle unexpected events
+          }
+        })
+      );
     }
     
-    addUpdate(Id: string|null, update: any): Observable<any> {
-      return this.http.post(`${this.apiUrl1}/updates/${Id}`, update);
+    addUpdate(id: string|null, formData: FormData): Observable<any> {
+      return this.http.post<any>(`${this.apiUrl1}/updates/${id}`, formData, {
+        reportProgress: true,  // Enable progress tracking
+        observe: 'events'      // Observe upload events
+      }).pipe(
+        map(event => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              const progress = Math.round((100 * event.loaded) / (event.total ?? 1));
+              return { status: 'progress', message: progress }; // Emit progress event
+            case HttpEventType.Response:
+              return event; // Emit the final response event
+            default:
+              return `Unhandled event: ${event.type}`;
+          }
+        })
+      );
     }
+    
     logout(): void {
       localStorage.removeItem('authToken'); // Remove the token
       this.router.navigate(['/login']); // Redirect to login page

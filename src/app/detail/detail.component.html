@@ -1,119 +1,194 @@
-<html >
-<body>
+<html>
+  <body>
     <div class="container">
-        <div class="row mb-4 align-items-center">
-            <div class="col-12 d-flex justify-content-between align-items-center">
-              
-                <div class="logo">
-                    <img src="/assets/Logo-removebg-preview.png" alt="Logo" />
-                  </div>              
-              <div class="d-flex align-items-center">
-                <button id="seDeconnecterButton" class="btn me-2" (click)="onSeDeconnecter()" >
-                  <i class="fa fa-sign-out"></i>
-                  &nbsp; &nbsp;Se Deconnecter
+      <div class="row mb-4 align-items-center">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <div class="logo">
+            <img src="/assets/Logo-removebg-preview.png" alt="Logo" />
+          </div>
+          <form>
+            <input
+              type="text"
+              class="form-control input-text"
+              placeholder="Search products...."
+              [(ngModel)]="query"
+              (input)="onInputChange()"
+              (blur)="onBlur()"
+              autocomplete="off"
+              name="search"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+            <div class="input-group-append">
+              <button class="btn1" type="button">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </form>
+          <div class="suggestions-dropdown" *ngIf="suggestions.length > 0">
+            <ul>
+              <li *ngFor="let suggestion of suggestions" (click)="onSelect(suggestion)">
+                Nom de l'app :{{ suggestion.name }}<br />
+                Nom de client:{{ suggestion.client }}
+              </li>
+            </ul>
+          </div>
+          <div class="d-flex align-items-center">
+            <button class="btn btn-add" (click)="retour()" type="button">
+              <i class="fa fa-home"></i>
+              &nbsp; &nbsp; Home page
+            </button>
+            <button id="seDeconnecterButton" class="btn me-2" (click)="onSeDeconnecter()">
+              <i class="fa fa-sign-out"></i>
+              &nbsp; &nbsp;Se Deconnecter
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-row">
+        <!-- Video Section -->
+        <div class="video-section">
+          <video class="demo-video" [src]="latestUpdate.demo" controls></video>
+        </div>
+
+        <!-- App Details Section -->
+        <div class="app-details">
+          <div class="rectangle-parent">
+            <b>Nom Application: </b>{{ app.name }}<br />
+            <b>Nom Client: </b> {{ app.client }}<br />
+            <b>Consultant Technique:</b> {{ latestUpdate.consultantTechnique }}<br />
+            <b>Consultant Fonctionnel:</b> {{ latestUpdate.consultantFonctionnel }}<br />
+            <div class="info">
+              <b>Description: </b>
+              <span>{{ app.description }}</span>
+            </div>
+            <div class="images-gallery">
+              <img *ngFor="let image of latestUpdate.photos" [src]="image" alt="Image" class="image-item" />
+            </div>
+
+            <div class="actions mt-3">
+              <a [href]="latestUpdate.apk" target="_blank">
+                <button class="btn btn-primary" (click)="downloadApk(latestUpdate.apk)">
+                  <i class="fa fa-download"></i> Download APK
                 </button>
-              </div>
+              </a><br />
+              <a [href]="latestUpdate.document" target="_blank">
+                <button class="btn btn-secondary" (click)="readDocumentation(latestUpdate.document)">
+                  <i class="fa fa-download"></i> Read Documentation
+                </button>
+              </a>
+              <a>
+              <button class="btn btn-add" (click)="update()" type="button">
+                <i class="fa fa-edit"></i>
+                &nbsp; &nbsp;Mise a Jour
+              </button>
+            </a>
             </div>
           </div>
-            <div class="container justify-content-center">
-            
-                <div class="row justify-content-center">
-            
-                   <div class="col-md-8 justify-content-centerr">
-                       
-                       <div class="input-group mb-3">
-                        <form>
-              <input type="text" class="form-control input-text" placeholder="Search products...." [(ngModel)]="query"  (input)="onInputChange()" 
-              (blur)="onBlur()" autocomplete="off" name="search"aria-label="Recipient's username" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn1" type="button"><i class="fa fa-search"></i></button>
-              </div>
-            </form>
-              <button class="btn btn-add" (click)="update()"type="button" >
-                <i class="fa fa-edit" ></i>
-                &nbsp; &nbsp; Mise a jours
-              </button>
-              <button class="btn btn-add" (click)="retour()"type="button" >
-                &nbsp; &nbsp; Home page
-              </button>
-              <div class="suggestions-dropdown" *ngIf="suggestions.length > 0">
-                <ul>
-                  <li *ngFor="let suggestion of suggestions" (click)="onSelect(suggestion)">
-                    Nom de l'app :{{ suggestion.name }}<br>
-                    Nom de client:{{suggestion.client}}
-                  </li>
-                </ul>
-              </div>   
-            </div>
-                       
-                   </div>        
-                    
-                </div>   
-            </div>
-        <div class="top-row">
-            <div class="video-section">
-                <video class="demo-video" [src]="latestUpdate.demo" controls>
-                    
-                </video>
-            </div>
-            
-            <div class="app-details">
-                <div class="rectangle-parent">
-                <b>Nom Application: </b>{{app.name}}<br>
-                 <b>Nom Client: </b> {{app.client}}<br>
-                <b>ConsultantTechnique:</b> {{latestUpdate.consultantTechnique}}<br>
-                <b>ConsultantFonctionnel:</b> {{latestUpdate.consultantFonctionnel}}<br>
-                <div class="info">
-                    <b>Description: </b>
-                    <span>{{app.description}}</span>
-                </div>
-                <div class="images-gallery">
-                    <img *ngFor="let image of latestUpdate.photos" [src]="image" alt="Image" class="image-item"/>
-                </div>
-            
-                <div class="actions mt-3">
-                  <a [href]="latestUpdate.apk" target="_blank" >
-                    <button class="btn btn-primary" (click)="downloadApk(latestUpdate.apk)"><i class="fa fa-download"></i> Download APK</button>
-                  </a><br>
-                  <a  [href]="latestUpdate.document" target="_blank" >
-                    <button class="btn btn-secondary" (click)="readDocumentation(latestUpdate.document)"><i class="fa fa-download"></i> Read Documentation</button>
-                  </a>
-                    
-                </div>
-            </div>
         </div>
-    </div>
 
-        <div class="bottom-row">
-            <div class="updates-section">
-                <div class="rectangle-group">
-                    <div class="group-item">
-                        <h2 class="lhistorique-des-mise">L’historique des Mise a jours</h2>
-                        <div *ngFor="let update of otherUpdates"class="mise-a-jours-faite-par-devlopp-parent">
-                            <div class="mise-a-jours-container">
-                                
-                                    <h3  class="mise-a-jours-faite-par-devlopp"><span>Mise a jours faite  le {{update.date | date:'dd MMM yyyy'}}</span></h3>
-                                
-                                <p class="mise-a-jours-faite-par-devlopp">
-                                    <b>ConsultantTechnique:</b> {{update.consultantTechnique}}<br>
-                                    <b>ConsultantFonctionnel:</b> {{update.consultantFonctionnel}}<br>
-                                    <a [href]="update.apk" target="_blank" >
-                                        Télécharger APK
-                                      </a><br>
-                                      <a  [href]="update.document" target="_blank" >
-                                        Lire Documentation
-                                      </a>
-                                </p>
-                            </div>
-                            
-                        </div>
-                        
-                        
+        <!-- Updates Section -->
+        <div class="updates-section">
+          <div class="rectangle-group">
+            <div class="group-item">
+              <h3 class="lhistorique-des-mise">L’historique des Mise a jours</h3>
+              <div *ngFor="let update of latestsUpdate" class="mise-a-jours-faite-par-devlopp-parent">
+                <div class="mise-a-jours-container">
+                  <p class="mise-a-jours-faite-par-devlopp">
+                    <span><b>Mise a jours faite le {{ update.date | date: 'dd MMM yyyy' }}</b></span>
+                  </p>
+                  <p class="mise-a-jours-faite-par-devlopp">
+                    <b>ConsultantTechnique:</b> {{ update.consultantTechnique }}<br />
+                    <b>ConsultantFonctionnel:</b> {{ update.consultantFonctionnel }}<br /></p>
+                    <div class="update-links">
+                      <a [href]="update.apk" target="_blank">Télécharger APK</a>
+                      <a [href]="update.document" target="_blank">&nbsp; &nbsp;Lire Documentation</a>
                     </div>
+                  
                 </div>
+              </div>
             </div>
-            
-           
-        </div>     
+            <div *ngIf="latestsUpdate.length > 3" class="more-updates-container">
+              <button (click)="goToMoreDetails()">Voir plus de détails</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
 
+<style>
+/* Container for video, app details, and updates */
+.content-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
 
+/* Video Section */
+.video-section {
+  flex: 1;
+  padding: 15px;
+  background-color: #DFE3EE;
+  border-radius: 6px;
+  max-width: 400px;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* App Details */
+.app-details {
+  flex: 1;
+  padding: 15px;
+  background-color: #DFE3EE;
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 1.4;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.8cm;
+}
+
+/* Updates Section */
+.updates-section {
+  flex: 1;
+  padding: 15px;
+  background-color: #DFE3EE;
+  border-radius: 6px;
+}
+
+/* Images Gallery */
+.images-gallery {
+  margin-top: 0.8em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.image-item {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .content-row {
+    flex-direction: column;
+  }
+}
+
+</style>
