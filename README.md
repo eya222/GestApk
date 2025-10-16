@@ -1,27 +1,165 @@
-# GestApk
+📱 APK Management System
+========================
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.6.
+A full-stack web platform for managing Android applications (APKs) developed by **SRA Integration**.\
+This project is composed of **two repositories**:
 
-## Development server
+-   🎨 **Frontend (Angular)** → [Gestion APK Frontend](https://github.com/eya222/GestApk)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+-   ⚙️ **Backend (NestJS)** → [Gestion APK Backend](https://github.com/eya222/Gest_Apk_backend)
 
-## Code scaffolding
+* * * * *
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Overview
+-----------
 
-## Build
+The APK Management System allows authenticated users to:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+-   Manage all internal Android apps in one place
 
-## Running unit tests
+-   Upload and store APKs, demo videos, screenshots, and documents
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+-   Add new updates for each application
 
-## Running end-to-end tests
+-   Securely store files using **Azure Blob Storage**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+* * * * *
 
-## Further help
+ Tech Stack
+--------------
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Layer | Technology | Description |
+| --- | --- | --- |
+| **Frontend** | Angular | User interface |
+| **Backend** | NestJS | REST API |
+| **Database** | [MongoDB](https://www.mongodb.com/) | Application and update data |
+| **Storage** | Azure Blob Storage | Files (APK, demo, photos, docs) |
+| **Authentication** | JWT | Secure user access |
+
+* * * * *
+
+🧭 Project Structure
+--------------------
+
+`📂 gestion-apk/
+├── frontend/  → Angular application
+└── backend/   → NestJS API`
+
+
+* * * * *
+
+⚙️ Backend Setup (NestJS)
+-------------------------
+
+### 🪣 Repository
+
+➡️ [Gestion APK Backend](https://github.com/eya222/Gest_Apk_backend)
+
+### 1️⃣ Clone the backend
+
+`git clone https://github.com/eya222/Gest_Apk_backend.git
+cd Gest_Apk_backend
+npm install`
+
+### 2️⃣ Configure environment
+
+Create a `.env` file in the backend root:
+
+`MONGODB_URI=your_mongodb_connection_string
+AZURE_STORAGE_CONNECTION_STRING=your_azure_blob_connection_string
+JWT_SECRET=your_secret_key
+PORT=3000`
+
+### 3️⃣ Run the backend
+
+`npm run start:dev`
+
+✅ Backend will run on `http://localhost:3000`
+
+* * * * *
+
+💻 Frontend Setup (Angular)
+---------------------------
+
+### 🪣 Repository
+
+➡️ [Gestion APK Frontend](https://github.com/eya222/GestApk)
+
+### 1️⃣ Clone the frontend
+
+`git clone https://github.com/eya222/GestAPK.git
+cd GestApk
+npm install`
+
+### 2️⃣ Configure API URL
+
+In `src/environments/environment.ts`, set your backend URL:
+
+`export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000'  // NestJS server
+};`
+
+### 3️⃣ Run the frontend
+
+`ng serve`
+
+✅ Frontend runs at <http://localhost:4200>
+
+* * * * *
+
+🌐 Features
+-----------
+
+### 👤 Authentication
+
+-   JWT-based login and signup
+
+-   Only users with `@sra-tunisie.com` email can register
+
+### 🧩 App Management
+
+-   Add, update, and view all applications
+
+-   Upload APKs, demos, documents, and photos
+
+### 🔁 Updates
+
+-   Each update includes:
+
+    -   Consultants (tech + functional)
+
+    -   Description
+
+    -   Files (APK, demo, photos, docs)
+
+    -   Date (auto-generated)
+
+* * * * *
+
+☁️ Cloud Storage (Azure Blob)
+-----------------------------
+
+All uploaded files (APKs, demos, etc.) are stored in **Azure Blob Storage**, and their URLs are saved in MongoDB for easy retrieval.
+
+
+
+🧩 Future Enhancements
+----------------------
+
+-   Role-based access control (admin / developer)
+
+-   Dashboard with usage statistics
+
+-   Notifications for new updates
+
+-   Improved file versioning system
+
+* * * * *
+
+👩‍💻 Author
+------------
+
+**Eya Naimi**\
+Intern at **SRA Integration**\
+💡 Technologies: Angular - NestJS - MongoDB - Azure Blob Storage
